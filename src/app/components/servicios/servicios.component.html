@@ -16,11 +16,11 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="ser dto of Servicios">
-				<td>{{ser.Id}}</td>
-				<td class="text-right">{{ser.Descripcion }}</td>
-				<td class="text-right">{{ser.Importe}}</td>
-				<td class="text-right">{{ser.CantHoras}}</td>
+			<tr *ngFor="let ser of Lista.Lista">
+				<td>{{ser.idservicio}}</td>
+				<td class="text-right">{{ser.descripcion }}</td>
+				<td class="text-right">{{ser.importe}}</td>
+				<td class="text-right">{{ser.cantidadhoras}}</td>
 			</tr>
 		</tbody>
 	</table>

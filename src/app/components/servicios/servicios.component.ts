@@ -11,8 +11,12 @@ export class ServiciosComponent implements OnInit {
   constructor(private serviciosService: ServiciosService) {}
 
   ngOnInit() {
+    this.getServicios();
+  }
+  getServicios() {
     this.serviciosService.get().subscribe((res: Servicios[]) => {
       this.Lista = res;
+      console.log(this.Lista);
     });
   }
 }
