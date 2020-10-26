@@ -1,0 +1,27 @@
+<div>
+	<button type="button" class="btn btn-primary" (click)="Agregar()">
+            <span class="fas fa-plus"> </span> 
+            Agregar
+        </button>
+</div>
+
+<div id="divTablaServicios">
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th class="text-center">ID</th>
+				<th class="text-center">Descripcion</th>
+				<th class="text-center">Importe</th>
+				<th class="text-center">Cantidad Horas</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="ser dto of Servicios">
+				<td>{{ser.Id}}</td>
+				<td class="text-right">{{ser.Descripcion }}</td>
+				<td class="text-right">{{ser.Importe}}</td>
+				<td class="text-right">{{ser.CantHoras}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
