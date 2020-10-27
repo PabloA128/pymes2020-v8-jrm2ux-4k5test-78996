@@ -19,4 +19,7 @@ export class ServiciosComponent implements OnInit {
       console.log(this.Lista);
     });
   }
+  Alta() {
+    this.serviciosService.post();
+  }
 }

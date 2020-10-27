@@ -5,6 +5,7 @@ import {
   HttpErrorResponse,
   HttpParams
 } from "@angular/common/http";
+import { Servicios } from "../models/servicios";
 
 @Injectable({
   providedIn: "root"
@@ -17,5 +18,8 @@ export class ServiciosService {
 
   get() {
     return this.httpClient.get(this.resourceUrl);
+  }
+  post(obj: Servicios) {
+    return this.httpClient.post(this.resourceUrl, obj);
   }
 }
