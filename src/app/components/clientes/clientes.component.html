@@ -1,0 +1,27 @@
+<div>
+	<button type="button" class="btn btn-primary" (click)="Alta()">
+            <span class="fas fa-plus"> </span> 
+            Alta
+        </button>
+</div>
+
+<div id="divTablaServicios">
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th class="text-center">ID</th>
+				<th class="text-center">Nombre</th>
+				<th class="text-center">Numero Documento</th>
+				<th class="text-center">Tiene Trabajo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let ser of Lista.Lista">
+				<td>{{cli.IdCliente}}</td>
+				<td class="text-right">{{cli.Nombre }}</td>
+				<td class="text-right">{{cli.NumeroDocumento}}</td>
+				<td class="text-right">{{cli.TieneTrabajo}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

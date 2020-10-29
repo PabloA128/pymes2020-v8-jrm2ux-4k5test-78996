@@ -22,6 +22,8 @@ import { ModalDialogComponent } from "./components/modal-dialog/modal-dialog.com
 import { ServiciosComponent } from "./components/servicios/servicios.component";
 import { ServiciosService } from "./services/servicios.service";
 import { from } from "rxjs";
+import { ClientesComponent } from "./components/clientes/clientes.component";
+import { ClientesService } from "./services/clientes.service";
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { from } from "rxjs";
     ArticulosComponent,
     ArticulosFamiliasComponent,
     ModalDialogComponent,
-    ServiciosComponent
+    ServiciosComponent,
+    ClientesComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { from } from "rxjs";
       { path: "inicio", component: InicioComponent },
       { path: "articulos", component: ArticulosComponent },
       { path: "articulosfamilias", component: ArticulosFamiliasComponent },
-      { path: "servicios", component: ServiciosComponent }
+      { path: "servicios", component: ServiciosComponent },
+      { path: "clientes", component: ClientesComponent }
     ]),
     NgbPaginationModule,
     NgbModalModule
@@ -53,7 +57,7 @@ import { from } from "rxjs";
     {
       provide: HTTP_INTERCEPTORS,
       useClass: MyInterceptor,
-      multi: true
+      multi: true,
     }
   ],
   bootstrap: [AppComponent]
