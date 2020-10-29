@@ -1,11 +1,11 @@
 <div>
-	<button type="button" class="btn btn-primary" (click)="Alta()">
+	<button type="button" class="btn btn-primary" (click)="Agregar()">
             <span class="fas fa-plus"> </span> 
-            Alta
+            Agregar
         </button>
 </div>
 
-<div id="divTablaServicios">
+<div id="divTablaServicios" *ngIf="AccionABMC == 'L' && Lista?.length > 0">
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
@@ -16,7 +16,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let ser of Lista.Lista">
+			<tr *ngFor="let cli of Lista">
 				<td>{{cli.IdCliente}}</td>
 				<td class="text-right">{{cli.Nombre }}</td>
 				<td class="text-right">{{cli.NumeroDocumento}}</td>
@@ -25,3 +25,99 @@
 		</tbody>
 	</table>
 </div>
+
+<!-- Registro en Alta,Modificacion y Consulta -->
+<form name="FormReg" [formGroup]='FormReg' *ngIf="AccionABMC != 'L'" class="bg-light">
+
+	<fieldset [disabled]="AccionABMC==='C'">
+		<!--campo nombre-->
+		<div class="form-group row">
+			<label class="col-form-label col-sm-2 col-sm-offset-2" for="Nombre">Nombre <span
+                    class="text-danger">*</span></label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" formControlName="Nombre"
+         [ngClass]="{'is-invalid': (FormReg.controls.Nombre.touched || submitted)  
+            && FormReg.controls.Nombre.errors}" />
+
+				<span class="text-danger" *ngIf="(FormReg.controls.Nombre.touched || submitted) 
+                        && FormReg.controls.Nombre.errors?.required">
+                    Dato requerido.
+                </span>
+				<span class="text-danger" *ngIf="(FormReg.controls.Nombre.touched || submitted) 
+                       && (FormReg.controls.Nombre.errors?.minlength || FormReg.controls.Nombre.errors?.maxlength) ">
+                    Dato texto, 4 a 55 caracteres.
+                </span>
+
+			</div>
+		</div>
+
+		<!--campo Id Cliente-->
+		<div class="row form-group">
+			<label class="col-form-label col-sm-2 col-sm-offset-2" for="IdCliente">Id Cliente <span
+                    class="text-danger">*</span></label>
+			<div class="col-sm-6">
+				<input type="text" name="IdCliente" class="form-control" formControlName="IdCliente"
+            [ngClass]="{'is-invalid': (FormReg.controls.IdCliente.touched || submitted)  
+            && FormReg.controls.IdCliente.errors}" />
+				<span class="text-danger" *ngIf="(FormReg.controls.IdCliente.touched || submitted) 
+                       && FormReg.controls.IdCliente.errors?.required">
+                    Dato requerido.
+                </span>
+				<span class="text-danger" *ngIf="(FormReg.controls.IdCliente.touched || submitted) 
+               && FormReg.controls.IdCliente.errors?.pattern">
+                    Dato numérico, 1 a 7 dígitos.
+                </span>
+			</div>
+		</div>
+
+
+		<!--campo Numero Documento-->
+		<div class="form-group row">
+			<label class="col-form-label col-sm-2 col-sm-offset-2" for="NumeroDocumento">
+                Numero Documento <span class="text-danger">*</span>
+            </label>
+			<div class="col-sm-6">
+				<input type="text" name="NumeroDocumento" class="form-control" formControlName="NumeroDocumento"
+        [ngClass]="{'is-invalid': (FormReg.controls.NumeroDocumento.touched || submitted)  
+            && FormReg.controls.NumeroDocumento.errors}" />
+				<span class="text-danger" *ngIf="(FormReg.controls.NumeroDocumento.touched || submitted) 
+                        && FormReg.controls.NumeroDocumento.errors?.required">
+                    Dato requerido.
+                </span>
+				<span class="text-danger" *ngIf="(FormReg.controls.NumeroDocumento.touched || submitted) 
+                        && FormReg.controls.NumeroDocumento.errors?.pattern">
+                    Dato numérico, 1 a 7 dígitos.
+                </span>
+			</div>
+		</div>
+
+		<!--campo tiene trabajo-->
+		<div class="form-group row">
+			<label class="col-form-label col-sm-2 col-sm-offset-2" for="TieneTrabajo">Tiene Trabajo</label>
+			<div class="col-sm-6">
+				<select name="TieneTrabajo" disabled class="form-control" formControlName="TieneTrabajo">
+                    <option *ngFor="let opt of OpcionesActivo" [ngValue]="opt.Id">
+                        ‌{{ opt.Nombre }}
+                    <option>
+                </select>
+			</div>
+		</div>
+	</fieldset>
+
+	<!-- Botones Grabar, Cancelar/Volver' -->
+	<div class="row justify-content-center">
+		<button type="button" *ngIf="AccionABMC!=='C'" class="btn btn-primary" (click)="Grabar()">
+            <span class="fas fa-check"></span> Grabar
+        </button>
+		&nbsp;
+		<button type="button" class="btn btn-warning" (click)="Volver()">
+            <span class="fas fa-undo"></span> {{AccionABMC=='C' ? 'Volver' : 'Cancelar'}}
+        </button>
+	</div>
+
+	<!--texto: Revisar los datos ingresados...-->
+	<div id="divMsjFormRegistro" *ngIf="submitted && FormReg.invalid" class="row alert alert-danger">
+		<span class="fas fa-exclamation-sign"></span>{{Mensajes['RD']}}
+	</div>
+
+</form>
